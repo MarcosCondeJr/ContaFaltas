@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <locale.h>
+
+
+#define TAM 50
+#define TAMDISC 10
+
+struct FaltasDisciplina{
+	char materia[50];
+	int carga_horaria;
+	int contadorFaltas=0;
+	
+};
+
+typedef struct FaltasDisciplina FaltasDisciplina;
+
+void menuIniciar(){
+	printf("\nOLA, O QUE VOCE DESEJA FAZER HOJE?\n");
+	printf("\n1. CADASTRAR DISCIPLINA. \n");
+	printf("2. CONSULTAR MINHAS DISCIPLINAS.\n");
+	printf("3. ANOTAR UMA FALTA\n");
+	printf("4. ENCERRAR SESSAO\n");
+	printf("\n-----------------\n");
+	printf("\nESCOLHA UMA DAS OPCOES: ");
+}
+
+void cadastrarDisciplina(FaltasDisciplina cadastro_disciplina[], int contador_disciplina, int resposta){
+	do{	
+		printf("\nDisciplina: ");
+		scanf("%s",&cadastro_disciplina[contador_disciplina].materia);
+		fflush(stdin);
+		
+		printf("Carga horaria: ");
+		scanf("%d", &cadastro_disciplina[contador_disciplina].carga_horaria);
+		fflush(stdin);
+		contador_disciplina+=1;
+	
+		system("cls");
+		
+		printf("\nDESEJA CADASTRAR OUTRA DISCIPLIA?\n1. SIM | 2. NAO");
+		scanf("%d", &resposta);
+		}while(resposta==1);
+}
+
+void calcularFaltas(FaltasDisciplina cadastro_disciplina[], int contador_disciplina){
+	for(int i=0;i<contador_disciplina;i++){
+		int dias_aula[contador_disciplina];
+		int maximo_falta[contador_disciplina];
+		
+		dias_aula[i]=cadastro_disciplina[i].carga_horaria/3;
+		maximo_falta[i]=dias_aula[i]*0.25;
+		
+		printf("\n-----------------------\n");
+		printf("MATERIA: %s\n",cadastro_disciplina[i].materia);
+		printf("CARGA HORARIA: %d\n",cadastro_disciplina[i].carga_horaria);
+		printf("DIAS DE AULA: %d\n",dias_aula[i]);
+		printf("MAXIMO DE FALTAS PERMITIDAS: %d DIAS\n",maximo_falta[i]);
+		printf("\nCONTAGEM DE FALTAS: %d DIAS\n",cadastro_disciplina[i].contadorFaltas);
+		
+		printf("\n-----------------------\n");
+		
+	}
+}
+
+void anotarFaltas(FaltasDisciplina cadastro_disciplina[], int contador_disciplina){
+	int indice;
+	for (int i=0;i<contador_disciplina;i++){
+		printf("%d. %s\n",i+1,cadastro_disciplina[i].materia);
+		
+	}
+		scanf("%d", &indice);
+		indice-=1;
+		cadastro_disciplina[indice].contadorFaltas+=1;
+}
+ 
+int main(){
+	
+	FaltasDisciplina cadastro_disciplina[10];
+	int opcao,resposta=0;
+	int contador_disciplina=0;
+	
+	//Menu inicial
+	do {
+		menuIniciar();
+		scanf("%d", &opcao);	
+	
+		switch(opcao){	
+	
+			case 1: 
+			cadastrarDisciplina(cadastro_disciplina, contador_disciplina, resposta);	
+			break;
+			
+			case 2: 
+			calcularFaltas(cadastro_disciplina, contador_disciplina);
+			break;
+			
+			case 3:	
+			anotarFaltas(cadastro_disciplina, contador_disciplina);
+			
+			break;
+			
+		}
+	} while (opcao!=4);
+}
