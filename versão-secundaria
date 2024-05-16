@@ -10,7 +10,7 @@
 struct FaltasDisciplina{
 	char materia[50];
 	int carga_horaria;
-	int contadorFaltas;
+	int contadorFaltas=0;
 	
 };
 
@@ -38,9 +38,18 @@ void calcularFaltas(FaltasDisciplina cadastro_disciplina[], int contador_discipl
 		printf("MATERIA: %s\n",cadastro_disciplina[i].materia);
 		printf("CARGA HORARIA: %d\n",cadastro_disciplina[i].carga_horaria);
 		printf("DIAS DE AULA: %d\n",dias_aula);
-		printf("MAXIMO DE FALTAS: %d DIAS\n",maximo_falta);
+		printf("MAXIMO DE FALTAS PERMITIDAS: %d DIAS\n",maximo_falta);
+		printf("\nCONTAGEM DE FALTAS: %d DIAS\n",cadastro_disciplina[i].contadorFaltas);
+		
 		printf("\n-----------------------\n");
 		
+	}
+}
+
+void anotarFaltas(FaltasDisciplina cadastro_disciplina[], int contador_disciplina){
+	
+	for (int i=0;i<contador_disciplina;i++){
+		printf("%d. %s\n",i+1,cadastro_disciplina[i].materia);
 	}
 }
  
@@ -82,6 +91,14 @@ int main(){
 	calcularFaltas(cadastro_disciplina, contador_disciplina);
 	
 	break;
+	
+	case 3:
+		int indice;
+		anotarFaltas(cadastro_disciplina, contador_disciplina);
+		scanf("%d", &indice);
+		indice-=1;
+		cadastro_disciplina[indice].contadorFaltas+=1;
+		
 }
 } while (opcao!=4);
 }
