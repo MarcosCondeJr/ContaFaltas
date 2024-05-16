@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <locale.h>
+
+
+#define TAM 50
+#define TAMDISC 10
+
+struct FaltasDisciplina{
+	char materia[50];
+	int carga_horaria;
+	int contadorFaltas;
+	
+};
+
+typedef struct FaltasDisciplina FaltasDisciplina;
+
+void menuIniciar(){
+	printf("OLA, O QUE VOCE DESEJA FAZER HOJE?\n");
+	printf("1. CADASTRAR DISCIPLINA. \n");
+	printf("2. CONSULTAR MINHAS DISCIPLINAS.\n");
+	printf("3. ANOTAR UMA FALTA\n");
+	printf("4. ENCERRAR SESSAO\n");
+	printf("\n-----------------\n");
+	printf("\nESCOLHA UMA DAS OPCOES: ");
+}
+
+void calcularFaltas(FaltasDisciplina cadastro_disciplina[], int contador_disciplina){
+	for(int i=0;i<contador_disciplina;i++){
+		int dias_aula;
+		float maximo_falta;
+		
+		dias_aula=cadastro_disciplina[i].carga_horaria/3;
+		maximo_falta=dias_aula*0.25;
+		
+		printf("MATERIA: %s\n",cadastro_disciplina[i].materia);
+		printf("CARGA HORARIA: %d\n",cadastro_disciplina[i].carga_horaria);
+		printf("DIAS DE AULA: %d\n",dias_aula);
+		printf("MAXIMO DE FALTAS: %f DIAS\n",maximo_falta);
+		
+	}
+}
+ 
+int main(){
+	
+	FaltasDisciplina cadastro_disciplina[10];
+	int opcao,resposta;
+	int contador_disciplina=0;
+	
+	//Menu inicial
+	do {
+		menuIniciar();
+		scanf("%d", &opcao);	
+		switch(opcao){	
+	
+	
+
+	
+	case 1: 
+	do{
+	
+	
+		printf("\nDisciplina: ");
+		scanf("%s",&cadastro_disciplina[contador_disciplina].materia);
+		fflush(stdin);
+		
+		printf("Carga horaria: ");
+		scanf("%d", &cadastro_disciplina[contador_disciplina].carga_horaria);
+		fflush(stdin);
+	contador_disciplina+=1;
+	
+	system("cls");
+	
+	printf("\nDESEJA CADASTRAR OUTRA DISCIPLIA?\n1. SIM | 2. NAO");
+	scanf("%d", &resposta);
+	}while(resposta==1);
+	
+	break;
+	
+	case 2: 
+	calcularFaltas(cadastro_disciplina, contador_disciplina);
+	
+	break;
+}
+} while (opcao!=4);
+}
+
+
+
+
