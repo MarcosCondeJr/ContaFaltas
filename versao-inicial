@@ -7,7 +7,7 @@
 #define TAM 50
 
 struct FaltasDisciplina{
-	char disciplina[50];
+	char materia[50];
 	int carga_horaria;
 	int contadorFaltas;
 	
@@ -20,7 +20,9 @@ void menuIniciar(){
 	printf("1. CADASTRAR DISCIPLINA. \n");
 	printf("2. CONSULTAR MINHAS DISCIPLINAS.\n");
 	printf("3. ANOTAR UMA FALTA\n");
-	printf("4. ENCERRAR SESSÃO");
+	printf("4. ENCERRAR SESSAO\n");
+	printf("\n-----------------\n");
+	printf("\nESCOLHA UMA DAS OPCOES: ");
 }
  
 int main(){
@@ -36,17 +38,23 @@ int main(){
 	case 1: 
 	do{
 	int i=0;
-		
-		printf("Nome da disciplina: ""\n");
-		scanf("%50[^\n]s", &cadastro_disciplina[i].disciplina);
+	
+		printf("\nDisciplina: ");
+		scanf("%s",&cadastro_disciplina[i].materia);
 		fflush(stdin);
+		
+		/*printf("Nome da disciplina: ""\n");
+		scanf("%50[^\n]s", &cadastro_disciplina[i].disciplina);
+		fflush(stdin);*/
 		
 		printf("Carga horaria: ");
 		scanf("%d", &cadastro_disciplina[i].carga_horaria);
 		fflush(stdin);
 	i+=1;
 	
-	printf("DESEJA CADASTRAR OUTRA DISCIPLIA?\n\n1. SIM\n2. NAO");
+	system("cls");
+	
+	printf("\nDESEJA CADASTRAR OUTRA DISCIPLIA?\n1. SIM   |  2. NAO");
 	scanf("%d", &resposta);
 	}while(resposta==1);
 	
